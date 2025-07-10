@@ -1,0 +1,75 @@
+(Normalized)
+❄️ What is Snowflake Schema?
+The Snowflake Schema is a type of multidimensional database schema where:
+
+The fact table is at the center (like in a star schema)
+
+The dimension tables are normalized into multiple related tables, forming a snowflake-like structure
+
+📌 Key Characteristics
+Feature	Description
+Structure	Central fact table with normalized dimension tables
+Dimension tables	Split into sub-dimensions (normalized hierarchy)
+Data Redundancy	Less than star schema
+Query Performance	Slower than star (due to joins)
+Storage Efficiency	Better than star schema
+
+🎯 Use Case Example: Sales Analysis
+🏗️ Snowflake Schema Structure
+sql
+Copy code
+                      +---------------+
+                      |  Date Dim     |
+                      +---------------+
+                             |
+                             |
++-------------+      +--------------+      +----------------+
+| Product Dim |------|  Fact Table  |------| Customer Dim   |
++-------------+      +--------------+      +----------------+
+       |                                   |
++--------------+                   +-------------------+
+| Category Dim |                   | Region Dimension  |
++--------------+                   +-------------------+
+🧱 Tables in Snowflake Schema
+1. Fact Table: Contains measurable facts (sales, quantity, etc.)
+sql
+Copy code
+FactSales (
+    sale_id INT,
+    product_id INT,
+    customer_id INT,
+    date_id INT,
+    sales_amount DECIMAL,
+    quantity INT
+)
+2. Normalized Dimension Tables
+🧾 Product Dimension
+sql
+Copy code
+Product (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(50),
+    category_id INT
+)
+📦 Category Dimension (Sub-dimension of Product)
+sql
+Copy code
+Category (
+    category_id INT PRIMARY KEY,
+    category_name VARCHAR(50)
+)
+👤 Customer Dimension
+sql
+Copy code
+Customer (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(50),
+    region_id INT
+)
+🌍 Region Dimension (Sub-dimension of Customer)
+sql
+Copy code
+Region (
+    region_id INT PRIMARY KEY,
+    region_name VARCHAR(50)
+)

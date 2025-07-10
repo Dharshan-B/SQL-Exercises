@@ -1,2 +1,28 @@
 A star schema is a data modeling technique, primarily used in data warehousing, that organizes data into a central fact table surrounded by dimension tables.
 This structure resembles a star, hence the name, and is designed to optimize query performance for analytical purposes. 
+
+
+               +----------------+
+               |  Time Dim      |
+               +----------------+
+                       |
++-----------+   +------+-----+   +----------------+
+| Product   |---|  Fact Table |---| Customer Dim  |
+| Dimension |   +------------+   +----------------+
+                       |
+               +----------------+
+               |  Store Dim     |
+               +----------------+
+You're analyzing sales data:
+
+Fact Table: Contains how much was sold and when
+
+Dimension Tables: Contain the "who, what, when, where":
+
+Who bought it? → Customer
+
+What was bought? → Product
+
+When was it bought? → Time
+
+Where was it bought? → Store

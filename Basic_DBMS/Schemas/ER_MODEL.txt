@@ -1,0 +1,79 @@
+=======================================================================
+                      🧠 ENTITY-RELATIONSHIP (ER) MODEL
+=======================================================================
+
+📌 DEFINITION:
+The **ER Model** is a high-level **conceptual data model** used to design 
+database structures. It visually represents entities, their attributes, 
+and the relationships among them.
+
+=======================================================================
+| Component       | Description                                            |
+=======================================================================
+| Entity          | A real-world object or concept (table)                |
+| Attribute       | A property or detail of an entity (column)            |
+| Relationship    | An association among entities                         |
+| Primary Key     | Attribute(s) that uniquely identify each entity       |
+| Cardinality     | Defines how many instances participate in a relationship |
+=======================================================================
+
+📘 TYPES OF ENTITIES:
+
+| Type             | Description                        |
+|------------------|------------------------------------|
+| Strong Entity    | Exists independently (has PK)      |
+| Weak Entity      | Depends on another entity          |
+| Associative Entity | Used in many-to-many relationships |
+=======================================================================
+
+🎯 ATTRIBUTE TYPES:
+
+| Type             | Description                                 |
+|------------------|---------------------------------------------|
+| Simple           | Atomic values (e.g., name, age)             |
+| Composite        | Made up of multiple components (e.g., name → fname, lname) |
+| Derived          | Can be derived from other attributes (e.g., age from DOB) |
+| Multivalued      | Can hold multiple values (e.g., phone numbers) |
+=======================================================================
+
+🔗 RELATIONSHIP TYPES:
+
+| Type            | Description                                 | Example               |
+|------------------|---------------------------------------------|------------------------|
+| One-to-One (1:1) | One entity relates to one of another        | Person ↔ Passport      |
+| One-to-Many (1:N)| One entity relates to many of another       | Department → Student   |
+| Many-to-Many (M:N)| Many entities relate to many others        | Student ↔ Course       |
+=======================================================================
+
+🧾 EXAMPLE: University ER Model
+
+ENTITIES:
+1. Student (student_id, name, dob)
+2. Course (course_id, course_name, credits)
+3. Department (dept_id, dept_name)
+4. Enrollment (student_id, course_id, grade)
+
+RELATIONSHIPS:
+- Student ENROLLS in Course (M:N via Enrollment)
+- Student BELONGS TO Department (M:1)
+- Course OFFERED BY Department (M:1)
+
+=======================================================================
+📌 ER DIAGRAM NOTATION (Text Representation)
+
+[STUDENT] -----<ENROLLS>----- [COURSE]
+   |                             |
+   +-- name                      +-- course_name
+   +-- dob                       +-- credits
+
+[STUDENT] ---(belongs to)---> [DEPARTMENT]
+[COURSE]  ---(offered by)--->  [DEPARTMENT]
+
+=======================================================================
+✅ WHY USE ER MODEL?
+
+- Simplifies complex relationships
+- Used before creating relational schema
+- Helps normalize and plan database structures
+
+=======================================================================

@@ -1,0 +1,70 @@
+=======================================================================
+                      🧩 RELATIONAL SCHEMA SUMMARY
+=======================================================================
+
+📌 DEFINITION:
+A **Relational Schema** is the **logical blueprint** of a relational database.
+It describes:
+- Tables (relations)
+- Columns (attributes)
+- Data types
+- Primary & foreign keys
+- Relationships among tables
+
+=======================================================================
+| Element         | Description                                               |
+=======================================================================
+| Table           | A relation represented by rows and columns               |
+| Attribute       | A column in a table (field)                              |
+| Tuple           | A row in a table (record)                                |
+| Domain          | The data type or range of an attribute                   |
+| Primary Key     | Uniquely identifies each tuple                           |
+| Foreign Key     | Refers to the primary key of another table               |
+| Candidate Key   | A minimal set of attributes that can uniquely identify   |
+| Relationship    | Logical association between tables                       |
+=======================================================================
+
+🧱 EXAMPLE: Student Database Relational Schema
+
+1. TABLE: Student
+----------------------------------------------
+| student_id (PK) | name       | dept_id (FK) |
+----------------------------------------------
+
+2. TABLE: Department
+--------------------------------------
+| dept_id (PK) | dept_name    |
+--------------------------------------
+
+3. TABLE: Course
+----------------------------------------------
+| course_id (PK) | course_name | credits |
+----------------------------------------------
+
+4. TABLE: Enrollment
+--------------------------------------------------------------
+| student_id (FK) | course_id (FK) | grade |
+--------------------------------------------------------------
+
+🔁 Relationships:
+- Student.dept_id → Department.dept_id (One-to-Many)
+- Enrollment.student_id → Student.student_id (Many-to-One)
+- Enrollment.course_id → Course.course_id (Many-to-One)
+
+=======================================================================
+🧠 RELATIONAL SCHEMA PROPERTIES
+
+| Property           | Description                                         |
+|--------------------|-----------------------------------------------------|
+| Referential Integrity | Ensures foreign keys match primary keys or are NULL |
+| Normalization        | Removes redundancy and anomalies                   |
+| Keys                | Maintain uniqueness and indexing                    |
+| Constraints         | Enforce rules (NOT NULL, UNIQUE, CHECK, etc.)      |
+=======================================================================
+
+✅ BENEFITS OF RELATIONAL SCHEMA:
+- Clear data modeling
+- Supports SQL operations (JOIN, SELECT, INSERT, etc.)
+- Foundation for normalization and integrity
+
+=======================================================================

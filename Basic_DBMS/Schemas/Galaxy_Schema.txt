@@ -1,0 +1,79 @@
+🌌 What is Galaxy Schema?
+The Galaxy Schema (or Fact Constellation Schema) is a data warehouse schema that contains:
+
+Multiple fact tables
+
+Shared dimension tables
+
+It resembles a constellation of stars, where each star represents a subject area (like sales, shipping, returns), and some dimensions are shared across these stars.
+
+📐 Structure
+sql
+Copy code
+            +--------------+
+            |  Date Dim    |
+            +--------------+
+                 /  \
+                /    \
+      +---------+     +----------+
+      |                    |
++-------------+     +-------------+
+| Fact Sales  |     | Fact Returns|
++-------------+     +-------------+
+      \                    /
+       \                  /
+     +-------------+  +-------------+
+     | Product Dim |  | Customer Dim|
+     +-------------+  +-------------+
+🔁 Dimensions like Date, Customer, and Product are shared between multiple fact tables.
+
+🧱 Tables in a Galaxy Schema
+✅ 1. Fact Table: Sales
+sql
+Copy code
+FactSales (
+    sale_id INT,
+    product_id INT,
+    customer_id INT,
+    date_id INT,
+    store_id INT,
+    quantity INT,
+    total_amount DECIMAL
+)
+✅ 2. Fact Table: Returns
+sql
+Copy code
+FactReturns (
+    return_id INT,
+    product_id INT,
+    customer_id INT,
+    date_id INT,
+    return_reason VARCHAR(100),
+    refund_amount DECIMAL
+)
+🟦 Shared Dimension Tables
+🧾 Product Dimension
+sql
+Copy code
+Product (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category_id INT
+)
+👤 Customer Dimension
+sql
+Copy code
+Customer (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(100),
+    region VARCHAR(50)
+)
+📅 Date Dimension
+sql
+Copy code
+Date (
+    date_id INT PRIMARY KEY,
+    date DATE,
+    month VARCHAR(15),
+    year INT
+)

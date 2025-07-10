@@ -1,0 +1,84 @@
+🔗 Types of Relationships in SQL
+There are three main types of relationships:
+
+1. One-to-One (1:1)
+👉 Definition: One row in Table A is related to exactly one row in Table B, and vice versa.
+
+🧾 Example:
+A person has one passport
+
+A passport belongs to one person
+
+🎯 SQL Structure:
+sql
+Copy code
+CREATE TABLE Person (
+    person_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE Passport (
+    passport_id INT PRIMARY KEY,
+    person_id INT UNIQUE,
+    FOREIGN KEY (person_id) REFERENCES Person(person_id)
+);
+The UNIQUE constraint ensures only one passport per person.
+
+2. One-to-Many (1:N)
+👉 Definition: One row in Table A can be related to many rows in Table B, but each row in Table B relates to only one row in Table A.
+
+🧾 Example:
+A teacher can teach many students
+
+Each student has only one teacher
+
+🎯 SQL Structure:
+sql
+Copy code
+CREATE TABLE Teacher (
+    teacher_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    teacher_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id)
+);
+3. Many-to-Many (M:N)
+👉 Definition: Rows in Table A can relate to multiple rows in Table B, and vice versa.
+
+🧾 Example:
+A student can enroll in many courses
+
+A course can have many students
+
+🎯 SQL Structure using a Junction Table:
+sql
+Copy code
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100)
+);
+
+-- Junction Table
+CREATE TABLE Enrollment (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Student(student_id),
+    FOREIGN KEY (course_id) REFERENCES Course(course_id)
+);
+This junction table (Enrollment) resolves the M:N relationship.
+
+🧠 Summary Table
+Relationship  Type	  Description	                      Implementation
+One-to-One    (1:1)	  One row in A ↔ One row in B	      Use UNIQUE foreign key in child table
+One-to-Many   (1:N)	  One row in A → Many rows in B	    Place foreign key in "many" side
+Many-to-Many  (M:N)	  Many rows in A ↔ Many rows in B	  Use a junction table

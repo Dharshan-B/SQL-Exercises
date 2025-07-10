@@ -1,0 +1,107 @@
+=======================================================================
+| Key Type       | Description                                      | Can be NULL? | Multiple in Table? |
+=======================================================================
+| Primary Key    | Uniquely identifies each row                     | No           | No                  |
+| Candidate Key  | Minimal set of attributes to identify a row      | No           | Yes                 |
+| Alternate Key  | Candidate key not chosen as primary              | No           | Yes                 |
+| Foreign Key    | Refers to primary key in another table           | Yes*         | Yes                 |
+| Composite Key  | Multiple columns together form unique identity   | No           | Yes                 |
+| Super Key      | Any attribute set that uniquely identifies a row | No           | Yes                 |
+| Surrogate Key  | Artificial key like auto-increment ID            | No           | Yes                 |
+| Unique Key     | Ensures column values are unique (can allow NULL)| Yes          | Yes                 |
+=======================================================================
+
+*Foreign keys can be NULL unless explicitly set to NOT NULL.
+
+🔑 1. Primary Key
+A unique identifier for each record in a table.
+
+Cannot be NULL and must be unique.
+
+✅ Only one primary key per table.
+
+Example:
+sql
+Copy code
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+🔑 2. Candidate Key
+A minimal set of attributes that can uniquely identify a row.
+
+A table can have multiple candidate keys, but only one is chosen as the primary key.
+
+Example:
+In a table: student_id and email both uniquely identify a student.
+
+Both are candidate keys.
+
+One is selected as the primary key.
+
+🔑 3. Alternate Key
+The candidate keys that are not selected as the primary key.
+
+Example:
+plaintext
+Copy code
+Candidate Keys: student_id, email
+Primary Key: student_id
+Alternate Key: email
+
+🔑 4. Foreign Key
+A column that refers to the primary key in another table.
+
+Used to maintain referential integrity between two tables.
+
+Example:
+sql
+Copy code
+CREATE TABLE Enrollment (
+    enrollment_id INT PRIMARY KEY,
+    student_id INT,
+    FOREIGN KEY (student_id) REFERENCES Student(student_id)
+);
+🔑 5. Composite Key
+A key made up of two or more columns that together uniquely identify a row.
+
+Example:
+sql
+Copy code
+CREATE TABLE Enrollment (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id)
+);
+Neither student_id nor course_id alone is unique, but together they are.
+
+🔑 6. Super Key
+Any set of columns that uniquely identifies a row.
+
+Includes primary key, composite key, and even larger combinations.
+
+✅ Every candidate key is a super key, but not every super key is minimal (so not a candidate key).
+
+🔑 7. Surrogate Key
+An artificial key (usually an auto-increment ID) created to uniquely identify records when natural keys are too complex or not available.
+
+Example:
+sql
+Copy code
+CREATE TABLE Product (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100)
+);
+product_id here is a surrogate key.
+
+🔑 8. Unique Key
+Ensures that all values in a column are unique, but unlike the primary key, it can contain NULLs.
+
+Example:
+sql
+Copy code
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE
+);

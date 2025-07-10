@@ -93,3 +93,30 @@ Normal Form	    Key Concept	              Action Taken
 1NF	     No     multi-valued attributes	  Split comma-separated values into rows
 2NF	     No     partial dependencies	    Separated Name and Department into a new table
 3NF	     No     transitive dependencies	  Moved Department details to a separate table
+
+🔵 What is Boyce-Codd Normal Form (BCNF)?
+BCNF is an advanced version of the Third Normal Form (3NF).
+It handles some edge cases where 3NF is satisfied, but anomalies can still exist due to non-trivial functional dependencies.
+
+✅ Definition:
+A table is in BCNF if:
+
+For every functional dependency X → Y, X must be a super key.
+
+In other words:
+
+The left-hand side of every dependency must be a candidate key (a column or set of columns that uniquely identify a row).
+
+🧠 Reminder:
+Functional Dependency (FD): If X → Y, then knowing X lets you determine Y.
+
+Super key: A set of one or more columns that can uniquely identify every row in a table.
+
+Candidate key: A minimal super key (no extra columns).
+
+⚠️ Why BCNF?
+1.Even after applying 3NF, some anomalies may remain when:
+
+2.There are multiple candidate keys
+
+3.And a non-prime attribute depends on a non-super key

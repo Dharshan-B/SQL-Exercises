@@ -1,0 +1,95 @@
+🧠 Normalization Example: From Unnormalized to 3NF
+🏫 Scenario: College Student Course Enrollment
+🔴 UNNORMALIZED TABLE
+pgsql
+Copy
+Edit
++-----------+----------+---------------------+--------------------+
+| StudentID | Name     | Courses             | Department         |
++-----------+----------+---------------------+--------------------+
+| 1         | Dharshan | Java, Python        | Computer Science   |
+| 2         | Karthik  | SQL, DBMS, Python   | Computer Science   |
++-----------+----------+---------------------+--------------------+
+✅ FIRST NORMAL FORM (1NF)
+Rule: Remove multi-valued attributes (like comma-separated courses)
+
+pgsql
+Copy
+Edit
++-----------+----------+---------+--------------------+
+| StudentID | Name     | Course  | Department         |
++-----------+----------+---------+--------------------+
+| 1         | Dharshan | Java    | Computer Science   |
+| 1         | Dharshan | Python  | Computer Science   |
+| 2         | Karthik  | SQL     | Computer Science   |
+| 2         | Karthik  | DBMS    | Computer Science   |
+| 2         | Karthik  | Python  | Computer Science   |
++-----------+----------+---------+--------------------+
+✅ SECOND NORMAL FORM (2NF)
+Rule: Remove partial dependencies
+Here, Name and Department depend only on StudentID not on (StudentID, Course)
+
+🔸 Student Table
+pgsql
+Copy
+Edit
++-----------+----------+--------------------+
+| StudentID | Name     | Department         |
++-----------+----------+--------------------+
+| 1         | Dharshan | Computer Science   |
+| 2         | Karthik  | Computer Science   |
++-----------+----------+--------------------+
+🔸 Enrollment Table
+sql
+Copy
+Edit
++-----------+---------+
+| StudentID | Course  |
++-----------+---------+
+| 1         | Java    |
+| 1         | Python  |
+| 2         | SQL     |
+| 2         | DBMS    |
+| 2         | Python  |
++-----------+---------+
+✅ THIRD NORMAL FORM (3NF)
+Rule: Remove transitive dependencies
+Department info should be in its own table.
+
+🔸 Student Table
+pgsql
+Copy
+Edit
++-----------+----------+--------------+
+| StudentID | Name     | DepartmentID |
++-----------+----------+--------------+
+| 1         | Dharshan | 10           |
+| 2         | Karthik  | 10           |
++-----------+----------+--------------+
+🔸 Department Table
+diff
+Copy
+Edit
++--------------+--------------------+
+| DepartmentID | DepartmentName     |
++--------------+--------------------+
+| 10           | Computer Science   |
++--------------+--------------------+
+🔸 Enrollment Table
+sql
+Copy
+Edit
++-----------+---------+
+| StudentID | Course  |
++-----------+---------+
+| 1         | Java    |
+| 1         | Python  |
+| 2         | SQL     |
+| 2         | DBMS    |
+| 2         | Python  |
++-----------+---------+
+✅ Summary Table
+Normal Form	    Key Concept	              Action Taken
+1NF	     No     multi-valued attributes	  Split comma-separated values into rows
+2NF	     No     partial dependencies	    Separated Name and Department into a new table
+3NF	     No     transitive dependencies	  Moved Department details to a separate table

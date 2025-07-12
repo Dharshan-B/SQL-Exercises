@@ -30,3 +30,4 @@ CREATE TABLE Dates (
     DateID INT PRIMARY KEY,
     Date DATE
 );
+--That's it
